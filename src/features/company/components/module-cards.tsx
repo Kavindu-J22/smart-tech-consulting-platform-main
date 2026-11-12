@@ -3,7 +3,7 @@ import { ModuleIcon } from "@/components/shared/module-icon";
 import { MODULE_DESCRIPTIONS, MODULE_LABELS, MODULES } from "@/features/company/options";
 
 // Modules that have a page. Add yours when its page exists (see features/README.md).
-const MODULES_WITH_PAGE = ["infrastructure", "product"];
+const MODULES_WITH_PAGE = ["infrastructure", "marketing", "product"];
 
 type Props = { companyId: string };
 

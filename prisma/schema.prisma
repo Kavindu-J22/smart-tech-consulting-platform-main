@@ -90,7 +90,8 @@ model Company {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  productAssessments ProductAssessment[]
+  productAssessments   ProductAssessment[]
+  marketingAssessments MarketingAssessment[]
 
   @@index([ownerId])
 }
@@ -124,6 +125,22 @@ model ProductAssessment {
   status    String   @default("draft") // draft | completed
   answers   Json     @default("{}")
   // SWOT, blockers, research guide, recommendations and the scenario ids used. Null until generated
+  report    Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+// One Marketing Strategy Assessment for a company (Kalana's research module).
+// Answers store Q1-Q21 responses; report stores audience intelligence, feature-to-value messages,
+// AHP channel recommendations, and exact-sum LKR budget allocation.
+model MarketingAssessment {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  status    String   @default("draft") // draft | completed
+  answers   Json     @default("{}")
   report    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
