@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-10T00:00:00Z",
+  "title": "Design System: Smart",
+  "extensions": {
+    "colorMeta": {
+      "neutral-900": {
+        "role": "primary",
+        "displayName": "Charcoal Ink",
+        "canonical": "#3c3c3c",
+        "tonalRamp": [
+          "#3c3c3c",
+          "#4c4c4c",
+          "#5c5c5c",
+          "#6c6c6c",
+          "#949494",
+          "#bcbcbc",
+          "#dcdcdc",
+          "#f4f4f4"
+        ]
+      },
+      "lilac-400": {
+        "role": "secondary",
+        "displayName": "Signal Lilac",
+        "canonical": "#6d51ab",
+        "tonalRamp": [
+          "#3b2a63",
+          "#523c88",
+          "#6d51ab",
+          "#a08cd0",
+          "#b9a8e0",
+          "#d2c5ef",
+          "#e6defa",
+          "#f4f2fc"
+        ]
+      },
+      "lilac-50": {
+        "role": "secondary",
+        "displayName": "Lilac Wash",
+        "canonical": "#f4f2fc",
+        "tonalRamp": ["#6d51ab", "#a08cd0", "#b9a8e0", "#d2c5ef", "#f4f2fc"]
+      },
+      "blue-300": {
+        "role": "tertiary",
+        "displayName": "Infrastructure Sky (strong)",
+        "canonical": "#66afea",
+        "tonalRamp": ["#66afea", "#93cbf6", "#bfe2fb", "#e1f5ff"]
+      },
+      "blue-100": {
+        "role": "tertiary",
+        "displayName": "Infrastructure Sky (tile)",
+        "canonical": "#bfe2fb",
+        "tonalRamp": ["#66afea", "#93cbf6", "#bfe2fb", "#e1f5ff"]
+      },
+      "yellow-300": {
+        "role": "tertiary",
+        "displayName": "Marketing Sun (strong)",
+        "canonical": "#feca00",
+        "tonalRamp": ["#feca00", "#fedc37", "#ffed6e", "#ffffa5"]
+      },
+      "yellow-100": {
+        "role": "tertiary",
+        "displayName": "Marketing Sun (tile)",
+        "canonical": "#ffed6e",
+        "tonalRamp": ["#feca00", "#fedc37", "#ffed6e", "#ffffa5"]
+      },
+      "lilac-300": {
+        "role": "tertiary",
+        "displayName": "Compliance Lavender (strong)",
+        "canonical": "#a08cd0",
+        "tonalRamp": ["#a08cd0", "#b9a8e0", "#d2c5ef", "#f4f2fc"]
+      },
+      "lilac-100": {
+        "role": "tertiary",
+        "displayName": "Compliance Lavender (tile)",
+        "canonical": "#d2c5ef",
+        "tonalRamp": ["#a08cd0", "#b9a8e0", "#d2c5ef", "#f4f2fc"],
+        "purpose": "Compliance tile."
+      },
+      "lime-300": {
+        "role": "tertiary",
+        "displayName": "Product Lime (strong)",
+        "canonical": "#c3d100",
+        "tonalRamp": ["#c3d100", "#cfe035", "#daf06b", "#e6ffa0"]
+      },
+      "lime-100": {
+        "role": "tertiary",
+        "displayName": "Product Lime (tile)",
+        "canonical": "#daf06b",
+        "tonalRamp": ["#c3d100", "#cfe035", "#daf06b", "#e6ffa0"]
+      },
+      "neutral-0": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff"
+      },
+      "neutral-50": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "#f9f9f9"
+      },
+      "neutral-100": {
+        "role": "neutral",
+        "displayName": "Fog",
+        "canonical": "#f4f4f4"
+      },
+      "neutral-200": {
+        "role": "neutral",
+        "displayName": "Hairline (panel)",
+        "canonical": "#ededed"
+      },
+      "neutral-300": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#dcdcdc"
+      },
+      "neutral-550": {
+        "role": "neutral",
+        "displayName": "Field Edge",
+        "canonical": "#949494"
+      },
+      "neutral-600": {
+        "role": "neutral",
+        "displayName": "Quiet Text",
+        "canonical": "#6c6c6c"
+      },
+      "neutral-700": {
+        "role": "neutral",
+        "displayName": "Soft Text",
+        "canonical": "#5c5c5c"
+      },
+      "destructive": {
+        "role": "neutral",
+        "displayName": "Danger",
+        "canonical": "oklch(0.577 0.245 27.325)"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The one page title via PageHeader; 24px on phones, 30px from sm. The landing hero h1 is the one exception: hand-made, 36px on phones, 48px from lg."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings and the FormPanel heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text, field text, button labels."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Card descriptions, status lines, nav items."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, choice group legends, admin tabs and filter pills."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Lowercase 'smart' in the logo only."
+      },
+      "numeric": {
+        "displayName": "Numeric",
+        "purpose": "Geist Mono, tabular figures: scores, LKR amounts, source numbers only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "colors",
+        "value": "color, background-color, border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Hover and selected changes on nav items, choice cards and buttons."
+      },
+      {
+        "name": "square-fill",
+        "value": "transform 500ms cubic-bezier(0.16, 1, 0.3, 1); score opacity 300ms cubic-bezier(0.16, 1, 0.3, 1) 150ms delay",
+        "purpose": "Landing StoryMark only: a module square's colour scales 0 to 1 from the centre and its score fades in when its step passes mid-screen; reverses on scroll up; off under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "AppButton primary: the main action on a page. 44px; 56px (lg) under fields.",
+      "html": "<button class=\"ds-btn-primary\">Save company</button>",
+      "css": ".ds-btn-primary { height: 44px; padding: 0 20px; border: 1px solid transparent; border-radius: 16px; background: var(--color-neutral-900, #3c3c3c); color: var(--color-neutral-0, #ffffff); font: 500 16px/1 Geist, ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: all 150ms; outline: none; } .ds-btn-primary:hover { background: rgb(60 60 60 / 0.8); } .ds-btn-primary:focus-visible { border-color: #6d51ab; box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "AppButton secondary: page actions next to the title, Cancel in dialogs.",
+      "html": "<button class=\"ds-btn-secondary\">Edit details</button>",
+      "css": ".ds-btn-secondary { height: 44px; padding: 0 20px; border: 1px solid #949494; border-radius: 16px; background: #ffffff; color: #3c3c3c; font: 500 16px/1 Geist, ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: all 150ms; outline: none; } .ds-btn-secondary:hover { background: #f4f4f4; } .ds-btn-secondary:focus-visible { border-color: #6d51ab; box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); }"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "AppButton danger: only the confirm button in a delete dialog.",
+      "html": "<button class=\"ds-btn-danger\">Delete company</button>",
+      "css": ".ds-btn-danger { height: 44px; padding: 0 20px; border: 1px solid transparent; border-radius: 16px; background: oklch(0.577 0.245 27.325); color: #ffffff; font: 500 16px/1 Geist, ui-sans-serif, system-ui, sans-serif; cursor: pointer; outline: none; } .ds-btn-danger:hover { background: oklch(0.577 0.245 27.325 / 0.9); } .ds-btn-danger:focus-visible { box-shadow: 0 0 0 3px oklch(0.577 0.245 27.325 / 0.2); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "TextField: a labelled 56px field with its error underneath.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Company name</span><input class=\"ds-field-input\" placeholder=\"Acme Labs\"></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-field-label { font-size: 14px; font-weight: 500; color: #3c3c3c; } .ds-field-input { height: 56px; padding: 0 16px; border: 1px solid #949494; border-radius: 16px; background: #ffffff; color: #3c3c3c; font-size: 16px; outline: none; transition: border-color 150ms, box-shadow 150ms; } .ds-field-input::placeholder { color: #6c6c6c; } .ds-field-input:focus-visible { border-color: #6d51ab; box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); }"
+    },
+    {
+      "name": "Choice Card",
+      "kind": "chip",
+      "refersTo": "choice-card",
+      "description": "ChoiceField option: a 56px clickable card with a radio; selected gets a charcoal ring.",
+      "html": "<div class=\"ds-choices\"><label class=\"ds-choice\"><input type=\"radio\" name=\"ds-stage\"> Idea</label><label class=\"ds-choice\"><input type=\"radio\" name=\"ds-stage\" checked> Pre-launch</label><label class=\"ds-choice\"><input type=\"radio\" name=\"ds-stage\"> Launched</label></div>",
+      "css": ".ds-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; } .ds-choice { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 12px 16px; border: 1px solid #949494; border-radius: 16px; background: #ffffff; color: #5c5c5c; font: 500 16px Geist, ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: border-color 150ms, color 150ms; } .ds-choice input { width: 20px; height: 20px; margin: 0; accent-color: #3c3c3c; } .ds-choice:hover { border-color: #6c6c6c; } .ds-choice:has(input:focus-visible) { border-color: #6d51ab; } .ds-choice:has(input:checked) { border-color: #3c3c3c; color: #3c3c3c; box-shadow: 0 0 0 1px #3c3c3c; }"
+    },
+    {
+      "name": "Sidebar Nav",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "SidebarNav: company links; active item on a lilac wash with a charcoal icon chip.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item ds-nav-active\" href=\"#\"><span class=\"ds-nav-chip\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"/><rect width=\"20\" height=\"14\" x=\"2\" y=\"6\" rx=\"2\"/></svg></span>PTS</a><a class=\"ds-nav-item\" href=\"#\"><span class=\"ds-nav-chip\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"/><rect width=\"20\" height=\"14\" x=\"2\" y=\"6\" rx=\"2\"/></svg></span>Second company</a></nav>",
+      "css": ".ds-nav { display: flex; flex-direction: column; gap: 4px; width: 240px; padding: 12px; background: #f9f9f9; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 22.4px; color: #5c5c5c; font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 150ms, color 150ms; outline: none; } .ds-nav-item:hover { background: #f4f4f4; color: #3c3c3c; } .ds-nav-item:focus-visible { box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); } .ds-nav-chip { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 12.8px; } .ds-nav-active, .ds-nav-active:hover { background: #f4f2fc; color: #3c3c3c; } .ds-nav-active .ds-nav-chip { background: #3c3c3c; color: #ffffff; }"
+    },
+    {
+      "name": "Module Card",
+      "kind": "card",
+      "refersTo": "module-card",
+      "description": "ModuleCards item: module icon tile, name, description and status line. Flat, hairline border.",
+      "html": "<div class=\"ds-module-card\"><span class=\"ds-module-tile\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"20\" height=\"8\" x=\"2\" y=\"2\" rx=\"2\"/><rect width=\"20\" height=\"8\" x=\"2\" y=\"14\" rx=\"2\"/><line x1=\"6\" x2=\"6.01\" y1=\"6\" y2=\"6\"/><line x1=\"6\" x2=\"6.01\" y1=\"18\" y2=\"18\"/></svg></span><h3 class=\"ds-module-name\">Infrastructure</h3><p class=\"ds-module-desc\">Tech readiness and how well your setup can grow</p><p class=\"ds-module-status\"><span class=\"ds-module-dot\"></span>Not started</p></div>",
+      "css": ".ds-module-card { display: flex; flex-direction: column; width: 220px; padding: 20px; border: 1px solid #dcdcdc; border-radius: 22.4px; background: #ffffff; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-module-tile { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 16px; background: #bfe2fb; color: #3c3c3c; } .ds-module-name { margin: 16px 0 4px; font-size: 16px; font-weight: 700; color: #3c3c3c; } .ds-module-desc { margin: 0 0 16px; font-size: 14px; color: #6c6c6c; } .ds-module-status { display: flex; align-items: center; gap: 8px; margin: 0; padding-top: 16px; border-top: 1px solid #dcdcdc; font-size: 14px; color: #6c6c6c; } .ds-module-dot { width: 8px; height: 8px; border-radius: 9999px; background: #949494; }"
+    },
+    {
+      "name": "Logo Mark",
+      "kind": "custom",
+      "refersTo": "module-icon-infrastructure",
+      "description": "AppLogo: 2x2 module squares (blue, yellow, lilac, lime at 300) plus lowercase bold wordmark. Links to /companies by default; optional href (the landing page passes /).",
+      "html": "<a class=\"ds-logo\" href=\"#\"><span class=\"ds-logo-grid\"><span style=\"background:#66afea\"></span><span style=\"background:#feca00\"></span><span style=\"background:#a08cd0\"></span><span style=\"background:#c3d100\"></span></span><span class=\"ds-logo-word\">smart</span></a>",
+      "css": ".ds-logo { display: flex; align-items: center; gap: 8px; height: 44px; width: fit-content; text-decoration: none; } .ds-logo-grid { display: grid; grid-template-columns: repeat(2, 10px); gap: 2px; } .ds-logo-grid span { width: 10px; height: 10px; border-radius: 3px; } .ds-logo-word { font: 700 20px Geist, ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.05em; color: #3c3c3c; }"
+    },
+    {
+      "name": "Progress Mark",
+      "kind": "custom",
+      "refersTo": "progress-square-lg",
+      "description": "ProgressMark: the logo grid showing which modules are there. Filled = module 300, empty = 1.5px neutral-300 outline. sm 10px/3px, lg 28px/7px. Also on landing step headers (phones) and the landing close panel.",
+      "html": "<div class=\"ds-pm-row\"><span class=\"ds-pm ds-pm-lg\"><span style=\"background:#66afea\"></span><span style=\"background:#feca00\"></span><span class=\"ds-pm-empty\"></span><span style=\"background:#c3d100\"></span></span><span class=\"ds-pm ds-pm-sm\"><span style=\"background:#66afea\"></span><span class=\"ds-pm-empty\"></span><span class=\"ds-pm-empty\"></span><span class=\"ds-pm-empty\"></span></span></div>",
+      "css": ".ds-pm-row { display: flex; align-items: center; gap: 24px; } .ds-pm { display: grid; grid-template-columns: repeat(2, auto); width: fit-content; } .ds-pm-sm { gap: 2px; } .ds-pm-sm span { width: 10px; height: 10px; border-radius: 3px; } .ds-pm-lg { gap: 6px; } .ds-pm-lg span { width: 28px; height: 28px; border-radius: 7px; } .ds-pm .ds-pm-empty { box-sizing: border-box; background: #ffffff; border: 1.5px solid #dcdcdc; }"
+    },
+    {
+      "name": "Story Mark",
+      "kind": "custom",
+      "refersTo": "story-square-lg",
+      "description": "Landing StoryMark: the logo grid at page size (md 96px, lg 144px / 160px from xl), 25% corners. Empty = 1.5px neutral-300 outline; filled = module 300 with the example score in Geist Mono. Module names sit outside the squares. Captioned 'Example · N of 4 modules scored'.",
+      "html": "<div class=\"ds-sm\"><div class=\"ds-sm-cell\"><span class=\"ds-sm-name\">Infrastructure</span><span class=\"ds-sm-sq\" style=\"background:#66afea;border-color:transparent\">62</span></div><div class=\"ds-sm-cell\"><span class=\"ds-sm-name\">Marketing</span><span class=\"ds-sm-sq\" style=\"background:#feca00;border-color:transparent\">48</span></div><div class=\"ds-sm-cell ds-sm-bottom\"><span class=\"ds-sm-name ds-sm-empty-name\">Compliance</span><span class=\"ds-sm-sq\"></span></div><div class=\"ds-sm-cell ds-sm-bottom\"><span class=\"ds-sm-name ds-sm-empty-name\">Product</span><span class=\"ds-sm-sq\"></span></div></div>",
+      "css": ".ds-sm { display: grid; grid-template-columns: repeat(2, auto); gap: 20px; width: fit-content; } .ds-sm-cell { display: flex; flex-direction: column; gap: 8px; } .ds-sm-bottom { flex-direction: column-reverse; } .ds-sm-name { font: 500 14px Geist, ui-sans-serif, system-ui, sans-serif; color: #3c3c3c; } .ds-sm-empty-name { color: #6c6c6c; } .ds-sm-sq { box-sizing: border-box; display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; border-radius: 25%; border: 1.5px solid #dcdcdc; background: #ffffff; font: 500 24px 'Geist Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; color: #3c3c3c; }"
+    },
+    {
+      "name": "Coverage Ledger Row",
+      "kind": "card",
+      "refersTo": "coverage-panel",
+      "description": "ModuleCoverage row: icon tile, name, one module square per document (max 12, then +N), breakdown, Mono count, chevron. Counts are squares, never full bars.",
+      "html": "<a class=\"ds-cov\" href=\"#\"><span class=\"ds-cov-tile\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"20\" height=\"8\" x=\"2\" y=\"2\" rx=\"2\"/><rect width=\"20\" height=\"8\" x=\"2\" y=\"14\" rx=\"2\"/><line x1=\"6\" x2=\"6.01\" y1=\"6\" y2=\"6\"/><line x1=\"6\" x2=\"6.01\" y1=\"18\" y2=\"18\"/></svg></span><span class=\"ds-cov-name\">Infrastructure</span><span class=\"ds-cov-mid\"><span class=\"ds-cov-sq\"><i></i><i></i><i></i></span><span class=\"ds-cov-kinds\">2 papers · 1 guide</span></span><span class=\"ds-cov-count\">3<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#949494\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 18 6-6-6-6\"/></svg></span></a>",
+      "css": ".ds-cov { display: grid; grid-template-columns: auto 11rem 1fr auto; align-items: center; gap: 16px; width: 640px; padding: 16px 24px; border: 1px solid #dcdcdc; border-radius: 22.4px; background: #ffffff; color: #3c3c3c; text-decoration: none; font-family: Geist, ui-sans-serif, system-ui, sans-serif; transition: background-color 150ms; outline: none; } .ds-cov:hover, .ds-cov:focus-visible { background: #f9f9f9; } .ds-cov:focus-visible { box-shadow: inset 0 0 0 2px #6d51ab; } .ds-cov-tile { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 16px; background: #bfe2fb; } .ds-cov-name { font-weight: 700; } .ds-cov-mid { display: flex; flex-direction: column; gap: 8px; } .ds-cov-sq { display: flex; gap: 4px; } .ds-cov-sq i { width: 10px; height: 10px; border-radius: 3px; background: #66afea; } .ds-cov-kinds { font-size: 14px; color: #6c6c6c; } .ds-cov-count { display: flex; align-items: center; gap: 8px; font: 500 18px 'Geist Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Filter Pill",
+      "kind": "chip",
+      "refersTo": "filter-pill",
+      "description": "ModuleFilter link: module square, label, Mono count. Active = charcoal fill, white text.",
+      "html": "<nav class=\"ds-pills\"><a class=\"ds-pill ds-pill-active\" href=\"#\">All<span class=\"ds-pill-n\">9</span></a><a class=\"ds-pill\" href=\"#\"><span class=\"ds-pill-sq\" style=\"background:#feca00\"></span>Marketing<span class=\"ds-pill-n\">2</span></a></nav>",
+      "css": ".ds-pills { display: flex; gap: 8px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-pill { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border: 1px solid #dcdcdc; border-radius: 22.4px; color: #5c5c5c; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 150ms, color 150ms; outline: none; } .ds-pill:hover { border-color: #949494; color: #3c3c3c; } .ds-pill:focus-visible { box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); } .ds-pill-sq { width: 10px; height: 10px; border-radius: 3px; } .ds-pill-n { font-family: 'Geist Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; color: #6c6c6c; } .ds-pill-active, .ds-pill-active:hover { background: #3c3c3c; border-color: #3c3c3c; color: #ffffff; } .ds-pill-active .ds-pill-n { color: #dcdcdc; }"
+    },
+    {
+      "name": "File Drop Zone",
+      "kind": "input",
+      "refersTo": "file-drop-zone",
+      "description": "FileField empty state: dashed Field Edge zone, Fog icon tile; solid lilac border on Lilac Wash while dragging.",
+      "html": "<label class=\"ds-drop\"><span class=\"ds-drop-tile\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#5c5c5c\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v12\"/><path d=\"m17 8-5-5-5 5\"/><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/></svg></span><span>Drag a file here or <u>browse</u></span></label>",
+      "css": ".ds-drop { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 420px; padding: 40px 16px; border: 1px dashed #949494; border-radius: 16px; background: #ffffff; color: #3c3c3c; font: 400 16px Geist, ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 150ms, border-color 150ms; } .ds-drop:hover { border-color: #6c6c6c; background: #f9f9f9; } .ds-drop:active { border-style: solid; border-color: #6d51ab; background: #f4f2fc; } .ds-drop u { font-weight: 500; } .ds-drop-tile { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 16px; background: #f4f4f4; }"
+    },
+    {
+      "name": "Admin Tab",
+      "kind": "nav",
+      "refersTo": "nav-tab-active",
+      "description": "AdminNav: Admin chip plus tabs styled like sidebar items; active on Lilac Wash.",
+      "html": "<nav class=\"ds-admin\"><span class=\"ds-admin-chip\">Admin</span><a class=\"ds-tab ds-tab-active\" href=\"#\">Overview</a><a class=\"ds-tab\" href=\"#\">Documents</a></nav>",
+      "css": ".ds-admin { display: flex; align-items: center; gap: 4px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-admin-chip { margin-right: 12px; padding: 4px 8px; border-radius: 12.8px; background: #f4f4f4; color: #5c5c5c; font-size: 12px; font-weight: 600; } .ds-tab { display: flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 22.4px; color: #5c5c5c; font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 150ms, color 150ms; outline: none; } .ds-tab:hover { background: #f4f4f4; color: #3c3c3c; } .ds-tab:focus-visible { box-shadow: 0 0 0 3px rgb(109 81 171 / 0.5); } .ds-tab-active, .ds-tab-active:hover { background: #f4f2fc; color: #3c3c3c; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Four Squares",
+    "overview": "The four modules are the brand. Infrastructure, Marketing, Compliance and Product each own one pastel colour, and the logo is just those four colours as a 2x2 grid. Everything else stays quiet: charcoal text on white, thin grey lines, soft 16px corners. Colour on a screen should tell you which module you are looking at, and nothing else.\n\nThe app is a working tool for technical founders, and it is checked by experts and SUS testers. So screens are calm, roomy and easy to scan. One clear heading, short grey lines under it, cards with a thin border and no shadow. Text is plain and direct, a little warm: \"62 out of 100. Power backup is the biggest gap.\"\n\nThe name \"Smart\" may become \"Nexaura\". The mark is not a letter, so it survives the rename. The name is written only in `app-logo.tsx` and the root layout metadata.",
+    "keyCharacteristics": [
+      "Charcoal ink (neutral-900) on white. Never pure black.",
+      "One pastel per module, and module colours mean \"this module\" only.",
+      "Lilac-400 is the interaction colour: focus rings and accent text.",
+      "Flat. Borders and soft grey panels, not shadows.",
+      "16px corners on controls, about 22px on cards and nav items.",
+      "Geist for everything; Geist Mono only for numbers people compare.",
+      "Big touch targets: 44px buttons, 56px fields and choice cards."
+    ],
+    "rules": [
+      {
+        "name": "The Module Colour Rule",
+        "body": "Blue, yellow, lime and the lilac 100/300 shades belong to the four modules. Never use them for generic decoration, status (success, warning) or charts that are not about modules.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lilac Means Interaction Rule",
+        "body": "Lilac-400 marks focus and accent text. A screen that uses it as a background fill or for a heading has misused it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hex Lives In One File Rule",
+        "body": "Every colour is a token in `src/app/globals.css`. Classes use the token names (`bg-lilac-50`, `text-neutral-600`), never `bg-[#...]`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Is For Numbers Rule",
+        "body": "Use Geist Mono with tabular figures only for numbers people compare: scores, LKR amounts, source numbers. Never use mono as a \"technical\" costume for labels, headings or code-ish decoration.",
+        "section": "typography"
+      },
+      {
+        "name": "The Bold Not Big Rule",
+        "body": "Hierarchy comes from weight (700) and a short size step, not from huge display type. The largest text in the app is the 30px page title. The one exception is the logged-out landing page: its hero headline is 36px, 48px from lg. App, auth and admin pages still top out at 30px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Card Rule",
+        "body": "Cards and panels never get a shadow. Use a border and a tone change instead.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build every screen from the shared components (`AppButton`, `TextField`, `ChoiceField`, `ConfirmDialog`, `PageHeader`, `FormPanel`). The landing hero headline is the one hand-made page heading.",
+      "Do keep module colours in module order: Infrastructure blue, Marketing yellow, Compliance lilac, Product lime.",
+      "Do use the 100 shade for module tiles and backgrounds, and the 300 shade for the marks, module squares and score bars.",
+      "Do show counts as module squares (one per item, then \"+N\") and a Mono number, not as full-width bars.",
+      "Do use `ProgressMark` and `MODULE_STRONG_COLOURS` for module squares instead of writing the colour classes again.",
+      "Do use lilac-400 for focus and interaction, and charcoal (neutral-900) for primary actions and selected states.",
+      "Do keep touch targets at least 44px and fields and choice cards 56px.",
+      "Do show unset values as \"Not set\" in Quiet Text (neutral-600), not as a dash or blank.",
+      "Do put Geist Mono with tabular figures on scores, LKR amounts and source numbers.",
+      "Do check every screen at 390px and at laptop width.",
+      "Do label sample data as \"Example\" when it shows before a user has real data."
+    ],
+    "donts": [
+      "Don't use module colours for decoration, status or generic charts.",
+      "Don't use module yellow for warnings or notices; use a neutral bordered notice with an icon.",
+      "Don't draw a count as a bar. A full bar reads as a top score, and one document is not \"complete\".",
+      "Don't write hex colours in classes; add a token to `globals.css` instead.",
+      "Don't add shadows to cards or panels.",
+      "Don't use Geist Mono for labels, headings or anything that is not a compared number.",
+      "Don't write the product name anywhere except `app-logo.tsx` and the root layout metadata.",
+      "Don't edit `components/ui/`; wrap the part in `components/shared/`.",
+      "Don't design dark mode by editing the shadcn `.dark` block piecemeal."
+    ]
+  }
+}

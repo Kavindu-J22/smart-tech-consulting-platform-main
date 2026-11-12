@@ -1,0 +1,7 @@
+# generated or vendor files
+.next/
+node_modules/
+package-lock.json
+src/generated/
+src/components/ui/
+docs/

@@ -1,0 +1,22 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": ["src/features/infrastructure/components/infrastructure-start.tsx"],
+        "createdAt": "2026-10-09T16:56:27.542Z",
+        "reason": "Claude: near-black neutral-900 icon on bg-blue-100 tile, same as ModuleIcon"
+      },
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": ["src/features/knowledge/components/upload-form.tsx"],
+        "createdAt": "2026-10-09T17:57:23.710Z",
+        "reason": "Claude: near-black neutral-900 warning text on bg-yellow-50, high contrast"
+      }
+    ]
+  }
+}

@@ -1,0 +1,452 @@
+[
+  {
+    "scenario_id": "SIM-004",
+    "questionnaire_input": {
+      "product_concept": "An AI-powered Application Performance Monitoring (APM) tool specifically designed for Kubernetes microservice architectures to predict service latency spikes before they cause outages.",
+      "target_audience": "DevOps Engineers, Site Reliability Engineers (SREs), and Engineering Leads at mid-market cloud-native IT companies.",
+      "perceived_competitors": "Datadog, Dynatrace, New Relic, Grafana Cloud.",
+      "value_proposition": "Reduces mean-time-to-resolution (MTTR) by 40% through automated root-cause analysis without requiring complex custom agent configurations.",
+      "perceived_challenges": "Competing against established enterprise APM incumbents that offer all-in-one observability suites."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Niche specialization in Kubernetes telemetry and automated predictive anomaly detection.",
+          "Frictionless setup compared to heavily configured legacy monitoring agents."
+        ],
+        "weaknesses": [
+          "Lacks full-stack visibility (e.g., bare-metal server metrics, end-user mobile monitoring).",
+          "High computational overhead for running real-time predictive ML models on continuous trace logs."
+        ],
+        "opportunities": [
+          "Capitalizing on the growing cloud-native Kubernetes ecosystem.",
+          "Building open-source eBPF collector plugins to drive developer community adoption."
+        ],
+        "threats": [
+          "Major incumbents (e.g., Datadog) adding predictive AI features to their existing platforms.",
+          "Macroeconomic tightening leading IT departments to consolidate vendor tooling into single platforms."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Vendor Consolidation",
+          "description": "IT enterprise budgets are cutting point solutions in favor of unified, all-in-one monitoring platforms."
+        },
+        {
+          "blocker_type": "Security & Data Ingestion",
+          "description": "Enterprise SecOps teams strictly limit third-party agent log extraction due to sensitive customer payload risks."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "On-premise / private cloud deployment requirements for security-conscious enterprise clients.",
+          "SaaS pricing tier structures (e.g., ingested gigabytes vs. monitored pod count)."
+        ],
+        "validation_questions": [
+          "What is your current average MTTR for microservice incidents, and what delays resolution most?",
+          "Would your security team approve a third-party observability vendor using eBPF data collection?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-005",
+    "questionnaire_input": {
+      "product_concept": "An AI-assisted electronic health record system that transcribes patient-doctor consultations in real-time and formats clinical documentation automatically.",
+      "target_audience": "Outpatient medical clinics and mid-sized private hospital networks.",
+      "perceived_competitors": "Epic Systems, Cerner, Nuance DAX, Elation Health.",
+      "value_proposition": "Reduces clinical documentation burden by 60%, allowing doctors to see 20% more patients per day.",
+      "perceived_challenges": "Strict HIPAA compliance regulations and long sales cycles in healthcare procurement."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Significant operational efficiency gains for overburdened medical staff.",
+          "High accuracy in specialized medical terminology extraction."
+        ],
+        "weaknesses": [
+          "High technical overhead for maintaining zero-retention privacy protocols.",
+          "Complex integration requirements with legacy HL7/FHIR hospital data systems."
+        ],
+        "opportunities": [
+          "Expansion into automated billing and ICD-10 medical coding extraction.",
+          "Partnerships with medical insurance networks for faster claim processing."
+        ],
+        "threats": [
+          "EHR market giants building native transcription capabilities directly into their core software.",
+          "Liability risks arising from potential AI hallucination in patient charts."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Regulatory & Legal",
+          "description": "Strict HIPAA, GDPR, and medical liability laws require extensive third-party security audits prior to adoption."
+        },
+        {
+          "blocker_type": "Interoperability Barriers",
+          "description": "Legacy EHR systems in hospitals lack modern REST APIs, making data integration slow and expensive."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Clinical documentation accuracy standards acceptable to medical board compliance officers.",
+          "Provider willingness to adopt ambient listening technology during patient visits."
+        ],
+        "validation_questions": [
+          "How many hours per day do your physicians spend on administrative clinical notes?",
+          "What certification guarantees does your legal department require before approving ambient AI tools?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-006",
+    "questionnaire_input": {
+      "product_concept": "A personalized learning management platform using adaptive quizzing to help university students prepare for STEM exams.",
+      "target_audience": "Undergraduate engineering and computer science students.",
+      "perceived_competitors": "Canvas, Quizlet, Chegg, Coursera.",
+      "value_proposition": "Customized diagnostic practice tracks that target specific knowledge gaps per student.",
+      "perceived_challenges": "High user churn following exam periods and low conversion from free tier to paid subscriptions."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Granular learning analytics identifying specific weak concepts.",
+          "High engagement during midterms and finals week."
+        ],
+        "weaknesses": [
+          "Seasonal usage spikes lead to poor annual recurring revenue retention.",
+          "Student budget constraints restrict consumer pricing power."
+        ],
+        "opportunities": [
+          "B2B enterprise licensing directly to university departments.",
+          "Adding AI tutor assistance to explain incorrect diagnostic answers."
+        ],
+        "threats": [
+          "Free AI chatbots providing instant answers to textbook questions.",
+          "Faculty opposition if platform materials are viewed as study shortcuts."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Monetization Structure",
+          "description": "B2C study tools face high customer acquisition costs with low lifetime customer value due to summer gaps."
+        },
+        {
+          "blocker_type": "Content Sourcing",
+          "description": "Maintaining updated, university-accredited STEM question banks requires constant subject-matter expert labor."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Feasibility of shifting sales strategy from student B2C subscriptions to institutional B2B licensing.",
+          "Student willingness to engage with interactive practice questions outside of exam weeks."
+        ],
+        "validation_questions": [
+          "Would your academic department fund supplementary learning tools if they improved student retention rates?",
+          "What features keep you engaged in a study app between exam preparation periods?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-007",
+    "questionnaire_input": {
+      "product_concept": "A low-code checkout SDK for cross-border e-commerce merchants featuring dynamic currency conversion and localized payment methods.",
+      "target_audience": "Mid-sized cross-border online retailers operating in North America and Southeast Asia.",
+      "perceived_competitors": "Stripe, Adyen, PayPal Braintree.",
+      "value_proposition": "Reduces cart abandonment by 25% through instant local payment method matching.",
+      "perceived_challenges": "High fraud detection false-positives causing transaction declines on international cards."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Seamless localized payment integration boosting international sales conversion.",
+          "Developer-friendly implementation requiring minimal frontend code."
+        ],
+        "weaknesses": [
+          "Overly sensitive fraud engine incorrectly blocking legitimate international purchases.",
+          "Higher transaction processing fees compared to local domestic payment processors."
+        ],
+        "opportunities": [
+          "Integrating machine learning models to lower false-positive fraud detection.",
+          "Expanding support for emerging regional digital wallets and Buy-Now-Pay-Later (BNPL) options."
+        ],
+        "threats": [
+          "Established processors cutting fees to defend market share in emerging regions.",
+          "Changing cross-border financial regulations and local compliance mandates."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Algorithmic Friction",
+          "description": "High false-positive fraud rejection rates directly harm merchant revenue and buyer trust."
+        },
+        {
+          "blocker_type": "Regulatory Compliance",
+          "description": "Differing cross-border banking regulations require complex multi-jurisdictional licensing."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Optimizing fraud scoring thresholds without increasing chargeback liability.",
+          "Merchant tolerance levels for processing fee margins vs. conversion improvements."
+        ],
+        "validation_questions": [
+          "What percentage of your international cart abandonment is attributed to payment processing declines?",
+          "Which regional payment methods are most requested by your overseas customers?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-014",
+    "questionnaire_input": {
+      "product_concept": "An AI-powered automated contract review and risk-scoring tool for in-house corporate legal teams.",
+      "target_audience": "In-house legal counsel, enterprise procurement managers, and corporate risk officers.",
+      "perceived_competitors": "Ironclad, LawGeex, Robin AI, LinkSquares.",
+      "value_proposition": "Reduces NDA and vendor contract review cycles from 3 days to under 10 minutes by automatically flagging non-standard liability clauses.",
+      "perceived_challenges": "Ensuring high accuracy to avoid missing subtle legal liabilities in non-standard contract verbiage."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Dramatic reduction in contract review turnaround time.",
+          "Standardizes corporate risk policy enforcement across all enterprise vendor agreements."
+        ],
+        "weaknesses": [
+          "Requires extensive custom configuration to match specific enterprise legal playbooks.",
+          "High risk of user distrust if false-negative errors occur on critical liability terms."
+        ],
+        "opportunities": [
+          "Integration with e-signature platforms (DocuSign, Adobe Sign) for automated workflow execution.",
+          "Expanding support to multi-jurisdictional and cross-border international contract translation."
+        ],
+        "threats": [
+          "Enterprise legal departments resisting AI adoption due to strict professional liability concerns.",
+          "Established CLM (Contract Lifecycle Management) platforms bundling free native AI review tools."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Liability Risk Avoidance",
+          "description": "General Counsel teams refuse to delegate legal validation to automated systems without human-in-the-loop sign-off."
+        },
+        {
+          "blocker_type": "Data Confidentiality",
+          "description": "Enterprise clients prohibit sending un-redacted legal contracts to multi-tenant cloud LLM endpoints."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Deployment requirements for on-premise or isolated tenant hosting models.",
+          "Lawyer accuracy acceptance thresholds when benchmarking against human manual reviews."
+        ],
+        "validation_questions": [
+          "What is the maximum acceptable error rate when identifying non-standard indemnity clauses?",
+          "How does your legal team currently handle custom fallback clauses during vendor contract negotiations?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-015",
+    "questionnaire_input": {
+      "product_concept": "A smart home energy management dashboard that optimizes solar battery storage and EV charging schedules based on real-time dynamic electricity pricing.",
+      "target_audience": "Residential homeowners with solar panels and electric vehicles operating under time-of-use (TOU) energy tariffs.",
+      "perceived_competitors": "Tesla Powerwall software, Enphase Energy, Sense Energy Monitor.",
+      "value_proposition": "Cuts residential electricity bills by up to 30% through automated energy arbitrage.",
+      "perceived_challenges": "Complex installation requiring compatibility with multiple hardware brands (inverters, EV chargers, batteries)."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Direct financial cost savings for homeowners with clear monthly ROI.",
+          "Supports grid decarbonization and renewable energy self-consumption."
+        ],
+        "weaknesses": [
+          "Dependence on third-party hardware APIs that may change or restrict access.",
+          "High initial setup friction for users without existing smart home hardware infrastructure."
+        ],
+        "opportunities": [
+          "Aggregating home batteries into Virtual Power Plants (VPPs) to sell energy back to utility grids.",
+          "Partnering with residential solar installers as a bundled software addon."
+        ],
+        "threats": [
+          "Utility companies altering time-of-use pricing structures to reduce arbitrage margins.",
+          "Hardware OEMs locking down ecosystem integrations to favor native apps."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Hardware Interoperability",
+          "description": "Lack of standardized open protocols across home battery and EV charger manufacturers."
+        },
+        {
+          "blocker_type": "Utility Regulation Limits",
+          "description": "Regional grid regulations restrict automated residential energy export back to the grid."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Customer willingness to grant automated controls over home heating/charging routines.",
+          "Utility tariff complexity and regional variability across target markets."
+        ],
+        "validation_questions": [
+          "Are you comfortable allowing an automated algorithm to dictate when your EV charges overnight?",
+          "Which hardware brands currently make up your solar and energy storage setup?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-016",
+    "questionnaire_input": {
+      "product_concept": "A micro-influencer campaign management platform that automates campaign brief matching, content rights licensing, and performance tracking.",
+      "target_audience": "D2C consumer brand marketing managers and mid-sized digital marketing agencies.",
+      "perceived_competitors": "Grin, Aspire, CreatorIQ, Phyllo.",
+      "value_proposition": "Reduces influencer campaign coordination time by 70% using automated outreach and tracking links.",
+      "perceived_challenges": "Detecting fake engagement and bot follower networks across emerging social channels."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Streamlines tedious administrative tasks like contract signing and product gifting.",
+          "Focuses on cost-effective micro-influencers with higher audience engagement rates."
+        ],
+        "weaknesses": [
+          "Platform usage relies heavily on social media API permissions (Meta, TikTok, YouTube).",
+          "Inconsistent ROI attribution due to off-platform conversion tracking limits."
+        ],
+        "opportunities": [
+          "Integrating direct social commerce checkout tracking (TikTok Shop, Instagram Shopping).",
+          "Automating tax documentation and multi-currency payout processing for global creators."
+        ],
+        "threats": [
+          "Social media platforms limiting third-party API data access for creator metrics.",
+          "Shifts in consumer behavior reducing trust in sponsored creator posts."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Fraudulent Engagement",
+          "description": "Difficulty in identifying fake follower counts and artificially inflated engagement metrics."
+        },
+        {
+          "blocker_type": "API Access Restrictions",
+          "description": "Strict rate limits on social media APIs hinder real-time performance data aggregation."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Verification techniques for validating creator audience demographics.",
+          "Pricing models that align with brand campaign cadences (per-campaign vs. monthly SaaS)."
+        ],
+        "validation_questions": [
+          "How do you currently verify that an influencer's audience matches your target customer demographic?",
+          "What is your biggest operational bottleneck when managing campaigns with 20+ creators simultaneously?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-017",
+    "questionnaire_input": {
+      "product_concept": "An AI copilot for restaurant operational managers that predicts daily ingredient prep quantities based on weather, local events, and historical sales trends.",
+      "target_audience": "Independent multi-location restaurant owners and franchise operators.",
+      "perceived_competitors": "7shifts, Toast POS Inventory, Restaurant365, MarginEdge.",
+      "value_proposition": "Cuts food waste costs by 20% while preventing menu item stockouts during unexpected peak hours.",
+      "perceived_challenges": "Low technology adoption and high turnover rate among kitchen staff who execute prep tasks."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Direct profit margin recovery in an industry with narrow operating margins.",
+          "Integrates external real-time data drivers (weather, local sports events, foot traffic)."
+        ],
+        "weaknesses": [
+          "Requires consistent, clean historical Point-of-Sale (POS) data input.",
+          "High user training overhead due to fast turnover in kitchen personnel."
+        ],
+        "opportunities": [
+          "Automated supplier ordering trigger recommendations when stock thresholds fall low.",
+          "Expanding into recipe costing and dynamic menu price optimization."
+        ],
+        "threats": [
+          "Major POS vendors (e.g., Toast, Square) building native predictive prep modules.",
+          "Unpredictable supply chain price spikes disrupting profit margin calculations."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Operational Habit Persistence",
+          "description": "Kitchen staff rely on informal rules-of-thumb rather than checking software screens during prep shifts."
+        },
+        {
+          "blocker_type": "POS Data Fragmentation",
+          "description": "Legacy POS systems make pulling real-time hourly inventory usage data difficult."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Simplifying the kitchen user interface (e.g., WhatsApp updates vs. complex dashboards).",
+          "Integrations with local food distribution systems for seamless re-ordering."
+        ],
+        "validation_questions": [
+          "How many hours per week do your kitchen managers spend manually building prep sheets?",
+          "How do you currently adjust ingredient ordering when bad weather or local events occur?"
+        ]
+      }
+    }
+  },
+  {
+    "scenario_id": "SIM-018",
+    "questionnaire_input": {
+      "product_concept": "A real-time remote patient monitoring app for cardiology clinics that syncs continuous wearable ECG data to detect arrhythmias.",
+      "target_audience": "Cardiologists, electrophysiologists, and outpatient cardiac care units.",
+      "perceived_competitors": "iRhythm Technologies, BioTelemetry, AliveCor.",
+      "value_proposition": "Enables early detection of silent atrial fibrillation, reducing emergency hospitalization rates by 35%.",
+      "perceived_challenges": "Managing huge volumes of continuous signal data without overwhelming medical staff with false alerts."
+    },
+    "ground_truth_outputs": {
+      "swot_analysis": {
+        "strengths": [
+          "Continuous non-invasive monitoring provides superior diagnostic yields over periodic Holter monitors.",
+          "Proactive intervention improves long-term patient survival outcomes."
+        ],
+        "weaknesses": [
+          "High signal noise caused by motion artifacts requires sophisticated filter algorithms.",
+          "Reimbursement code complexity across different health insurance providers."
+        ],
+        "opportunities": [
+          "Expanding predictive models to detect early signs of heart failure decompensation.",
+          "Partnering with consumer smartwatch makers for direct sensor data integration."
+        ],
+        "threats": [
+          "Regulatory delays from medical device certification boards (e.g., FDA 510(k), CE Mark).",
+          "Class-action legal liability risks if critical arrhythmia events are missed."
+        ]
+      },
+      "market_blockers_report": [
+        {
+          "blocker_type": "Alert Fatigue & Physician Burnout",
+          "description": "Doctors refuse tools that send unvalidated alerts outside of clinic operational hours."
+        },
+        {
+          "blocker_type": "Insurance Reimbursement Gaps",
+          "description": "Uncertainty around medical billing codes for continuous remote telemetry monitoring."
+        }
+      ],
+      "market_research_guide": {
+        "key_investigation_areas": [
+          "Clinical trial design required to prove diagnostic equivalence to traditional Holter monitors.",
+          "Cardiologist workflow integration preferences within electronic health record software."
+        ],
+        "validation_questions": [
+          "How does your clinic handle the triage of continuous telemetry data received from outpatient devices?",
+          "What specific diagnostic accuracy sensitivity threshold is required before your team trusts automated arrhythmia flags?"
+        ]
+      }
+    }
+  }
+]

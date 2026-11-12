@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User, Session, Account and Verification come from `npx auth@latest generate` (Better Auth).
+
+model User {
+  id            String     @id
+  name          String
+  email         String
+  emailVerified Boolean    @default(false)
+  image         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  role          String     @default("founder")
+  sessions      Session[]
+  accounts      Account[]
+  companies     Company[]
+  documents     Document[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Company {
+  id              String   @id @default(cuid())
+  ownerId         String
+  owner           User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name            String
+  // Choice fields store ids from features/profile/options.ts
+  stage           String
+  productType     String
+  operatingMode   String
+  industry        String?
+  geographicFocus String?
+  budgetLkr       Int?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  productAssessments ProductAssessment[]
+
+  @@index([ownerId])
+}
+
+// A published source an admin uploaded for the modules' RAG. The file itself is in Vercel Blob.
+model Document {
+  id         String   @id @default(cuid())
+  title      String
+  // Ids from features/knowledge/options.ts
+  module     String // infrastructure | marketing | compliance | product | shared
+  sourceType String // peer_reviewed | government | provider | other
+  sourceUrl  String?
+  fileName   String
+  blobUrl    String
+  status     String   @default("uploaded") // uploaded → processed (later, when we embed into Pinecone)
+  addedById  String
+  addedBy    User     @relation(fields: [addedById], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+// One Product assessment for a company. Answers and report are JSON because each of the three
+// stages has a different questionnaire; features/product/schema.ts checks their shape.
+model ProductAssessment {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  // Ids from features/product/options.ts
+  stage     String // proposed | development | failed
+  status    String   @default("draft") // draft | completed
+  answers   Json     @default("{}")
+  // SWOT, blockers, research guide, recommendations and the scenario ids used. Null until generated
+  report    Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId])
+}
