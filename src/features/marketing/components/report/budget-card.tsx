@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { Calculator, Info, ShieldCheck } from "lucide-react";
 import type { BudgetReport } from "@/features/marketing/schema";
 
 type Props = {
@@ -6,6 +6,12 @@ type Props = {
 };
 
 export function BudgetCard({ data }: Props) {
+  const allocableMonthly = data.monthlyBudgetLkr - data.reserveMonthlyLkr;
+  const reservePct =
+    data.monthlyBudgetLkr > 0
+      ? ((data.reserveMonthlyLkr / data.monthlyBudgetLkr) * 100).toFixed(1)
+      : "0.0";
+
   return (
     <div className="flex flex-col gap-6 rounded-xl border border-neutral-200 bg-card p-6 shadow-xs">
       <div className="flex flex-col justify-between gap-4 border-b border-neutral-200 pb-4 sm:flex-row sm:items-center">
@@ -41,7 +47,9 @@ export function BudgetCard({ data }: Props) {
           <span className="text-xs font-medium text-neutral-500">Campaign Duration</span>
           <p className="mt-1 font-mono text-xl font-bold text-neutral-900">
             {data.campaignMonths}{" "}
-            <span className="text-xs font-normal text-neutral-500">months</span>
+            <span className="text-xs font-normal text-neutral-500">
+              {data.campaignMonths === 1 ? "month" : "months"}
+            </span>
           </p>
         </div>
 
@@ -79,7 +87,9 @@ export function BudgetCard({ data }: Props) {
               <tr>
                 <th className="px-3 py-2.5">Recommended Channel</th>
                 <th className="px-3 py-2.5 font-mono">Monthly (LKR)</th>
-                <th className="px-3 py-2.5 font-mono">Total ({data.campaignMonths} mos)</th>
+                <th className="px-3 py-2.5 font-mono">
+                  Total ({data.campaignMonths} {data.campaignMonths === 1 ? "mo" : "mos"})
+                </th>
                 <th className="px-3 py-2.5">Share (%)</th>
                 <th className="px-3 py-2.5">AHP Priority</th>
                 <th className="px-3 py-2.5">Allocation Rationale</th>
@@ -121,9 +131,7 @@ export function BudgetCard({ data }: Props) {
                   <td className="px-3 py-2.5 font-mono">
                     {data.reserveTotalLkr.toLocaleString()} LKR
                   </td>
-                  <td className="px-3 py-2.5 font-mono">
-                    {((data.reserveMonthlyLkr / data.monthlyBudgetLkr) * 100).toFixed(1)}%
-                  </td>
+                  <td className="px-3 py-2.5 font-mono">{reservePct}%</td>
                   <td className="px-3 py-2.5">—</td>
                   <td className="px-3 py-2.5 text-neutral-500 italic">
                     Unallocated cash buffer for agile testing
@@ -147,6 +155,37 @@ export function BudgetCard({ data }: Props) {
               </tr>
             </tfoot>
           </table>
+        </div>
+      </div>
+
+      {/* Transparent Calculation Breakdown */}
+      <div className="rounded-lg border border-neutral-200 bg-neutral-50/60 p-4 text-xs">
+        <div className="flex items-center gap-2 font-bold text-neutral-900 mb-2">
+          <Calculator className="size-4 text-neutral-700" />
+          <span>How this allocation was calculated</span>
+        </div>
+        <ol className="list-decimal pl-4 space-y-1.5 text-neutral-700 leading-relaxed">
+          <li>
+            <strong>Input Monthly Budget:</strong> {data.monthlyBudgetLkr.toLocaleString()} LKR.
+          </li>
+          <li>
+            <strong>Contingency Reserve:</strong> {reservePct}% deducted ({data.reserveMonthlyLkr.toLocaleString()} LKR/mo), leaving <strong>{allocableMonthly.toLocaleString()} LKR</strong> for channel deployment.
+          </li>
+          <li>
+            <strong>AHP Prioritization:</strong> Allocable budget is apportioned proportionally to each channel&apos;s multi-criteria AHP score.
+          </li>
+          <li>
+            <strong>Integer Optimization:</strong> The Largest-Remainder Method (Hamilton-Hare) is applied to floor allocations and distribute residual whole rupees to channels with the highest fractional remainders.
+          </li>
+          <li>
+            <strong>Exact-Sum Guarantee:</strong> The sum of allocated channel amounts plus contingency reserve strictly equals {data.monthlyBudgetLkr.toLocaleString()} LKR with zero rounding drift.
+          </li>
+        </ol>
+        <div className="mt-3 flex items-start gap-2 border-t border-neutral-200 pt-2 text-[11px] text-neutral-500">
+          <Info className="size-3.5 shrink-0 mt-0.5 text-neutral-400" />
+          <span>
+            <strong>Planning Notice:</strong> Budget figures represent strategic resource allocation computed deterministically by algorithm, NOT retrieved from a vector database or promising guaranteed customer acquisition costs (CPC/CPA) or sales ROI.
+          </span>
         </div>
       </div>
 

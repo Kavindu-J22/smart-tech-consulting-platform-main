@@ -26,8 +26,8 @@ const requiredText = (label: string, min = 2, max = 2000) =>
     .min(min, `${label} must be at least ${min} characters`)
     .max(max, `${label} must be under ${max} characters`);
 
-// Questionnaire answers schema (validates user responses to Q1-Q21)
-export const MarketingAnswersSchema = z.object({
+// Questionnaire answers base schema (Q1-Q21)
+export const MarketingAnswersBaseSchema = z.object({
   // Section A - Product Information (Q1–Q4)
   productName: requiredText("Product or service name", 2, 100),
   productDescription: requiredText("Product description", 10, 3000),
@@ -37,7 +37,7 @@ export const MarketingAnswersSchema = z.object({
   // Section B - Target Customer Information (Q5–Q9)
   primaryTargetCustomer: requiredText("Primary target customer description", 5, 1000),
   marketType: z.enum(MARKET_TYPES, { error: "Select target market type" }),
-  ageGroup: z.enum(AGE_GROUPS, { error: "Select representative age group" }),
+  ageGroup: z.enum(AGE_GROUPS, { error: "Select representative age group" }).optional().nullable(),
   customerRole: z.enum(CUSTOMER_ROLES, { error: "Select customer role" }),
   audienceLocation: z.enum(AUDIENCE_LOCATIONS, { error: "Select geographic location" }),
 
@@ -49,6 +49,7 @@ export const MarketingAnswersSchema = z.object({
   messageDetailPreference: z.enum(MESSAGE_DETAIL_PREFERENCES, {
     error: "Select desired message detail level",
   }),
+  targetAudienceLiteracyOverride: z.enum(LITERACY_TIERS).optional().nullable(),
 
   // Section D - Value & Channels (Q13–Q17)
   keyCustomerBenefit: requiredText("Main customer benefit", 5, 1500),
@@ -76,11 +77,23 @@ export const MarketingAnswersSchema = z.object({
   customAudienceNotes: z.string().trim().max(1000).optional(),
 });
 
-export type MarketingAnswers = z.infer<typeof MarketingAnswersSchema>;
-
 // Partial schema for draft saves
-export const MarketingDraftSchema = MarketingAnswersSchema.partial();
+export const MarketingDraftSchema = MarketingAnswersBaseSchema.partial();
 export type MarketingDraftInput = z.infer<typeof MarketingDraftSchema>;
+
+// Full validated schema with conditional validation:
+// Q7 (ageGroup) is required ONLY when marketType is "b2c". For "b2b" or "both", age targeting is not required.
+export const MarketingAnswersSchema = MarketingAnswersBaseSchema.superRefine((data, ctx) => {
+  if (data.marketType === "b2c" && !data.ageGroup) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Select representative customer age group for B2C consumer targeting (Q7)",
+      path: ["ageGroup"],
+    });
+  }
+});
+
+export type MarketingAnswers = z.infer<typeof MarketingAnswersSchema>;
 
 // Report Schemas
 export const FeatureBenefitPairSchema = z.object({
@@ -92,10 +105,15 @@ export type FeatureBenefitPair = z.infer<typeof FeatureBenefitPairSchema>;
 
 export const AudienceIntelligenceReportSchema = z.object({
   literacyTier: z.enum(LITERACY_TIERS),
+  questionnaireBaselineTier: z.enum(LITERACY_TIERS).optional(),
+  nlpSuggestedTier: z.enum(LITERACY_TIERS).optional(),
+  effectiveMessageTier: z.enum(LITERACY_TIERS).optional(),
+  overriddenByUser: z.boolean().optional(),
+  heuristicSignalLabel: z.string().optional(),
   probabilities: z.record(z.string(), z.number()),
   confidenceScore: z.number(),
   uncertaintyCaveat: z.string(),
-  ruleBaselineTier: z.enum(LITERACY_TIERS),
+  ruleBaselineTier: z.enum(LITERACY_TIERS), // kept for backward compatibility
   reasonCodes: z.array(z.string()),
   modelType: z.string(),
   isEmpiricallyValidated: z.boolean(),
@@ -117,6 +135,7 @@ export const FeatureToValueReportSchema = z.object({
   claimWarnings: z.array(z.string()),
   isAiGenerated: z.boolean(),
   generationModel: z.string(),
+  generationSource: z.enum(["OpenAI", "Template Fallback"]).optional(),
 });
 export type FeatureToValueReport = z.infer<typeof FeatureToValueReportSchema>;
 
@@ -182,6 +201,23 @@ export const ActionItemSchema = z.object({
 });
 export type ActionItem = z.infer<typeof ActionItemSchema>;
 
+export const RetrievedEvidenceSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  claim: z.string(),
+  decisionUse: z.string().optional(),
+  sourceTitle: z.string(),
+  sourceUrl: z.string(),
+  publisher: z.string(),
+  observedPeriod: z.string(),
+  caveat: z.string(),
+  score: z.number().optional(),
+  channelTags: z.array(z.string()).optional(),
+  marketTypes: z.array(z.string()).optional(),
+  campaignGoals: z.array(z.string()).optional(),
+});
+export type RetrievedEvidenceItem = z.infer<typeof RetrievedEvidenceSchema>;
+
 export const MarketingReportSchema = z.object({
   audienceIntelligence: AudienceIntelligenceReportSchema,
   featureToValue: FeatureToValueReportSchema,
@@ -189,6 +225,9 @@ export const MarketingReportSchema = z.object({
   budgetPlan: BudgetReportSchema,
   actionPlan: z.array(ActionItemSchema),
   citations: z.array(z.string()),
+  retrievedEvidence: z.array(RetrievedEvidenceSchema).optional(),
+  evidenceSource: z.string().optional(),
+  evidenceNamespace: z.string().optional(),
   generatedAt: z.string(),
   methodologyVersion: z.string(),
 });

@@ -192,3 +192,57 @@ $$\text{SUS Score} = 2.5 \times \sum_{i=1}^{10} \text{Contribution}_i \quad (0 \
 
 The dashboard provides an interactive evaluation widget allowing test participants to score the workflow and export signed JSON validation records.
 
+
+
+---
+
+## 8. Supervisor Corrections & Production Verification Log (November 2026)
+
+In response to formal supervisor review on 19 November 2026, the following four critical corrections were implemented and validated:
+
+### 8.1 Correction 1: Elimination of Premature Auto-Generation (Issue 1)
+- **Root Cause:** The wizard component bound `<form onSubmit={onSubmit}>` to the full questionnaire handler while fields had mock pre-filled defaults. Pressing Enter inside numeric budget inputs triggered browser form submission before intentional activation of the Run button.
+- **Resolution:**
+  1. Converted the Run button to an explicit `type="button"` with `onClick={handleExplicitRun}`.
+  2. The form intercepts implicit submit events (`e.preventDefault()`) and suppresses Enter key events on input elements.
+  3. Pre-filled mock default strings were removed; new assessments start clean and neutral.
+  4. Implemented an active mutation lock (`activeAnalysisLocks`) on the server to prevent race conditions from double clicks.
+- **Verification:** Unit tests in `tests/marketing/submit-guard.test.ts` verify that empty forms fail validation and cannot trigger execution without explicit user completion.
+
+### 8.2 Correction 2: Conditional Age Group Validation for B2B vs B2C (Issue 2)
+- **Root Cause:** Q7 (Age Group) was previously mandatory across all market types, violating B2B targeting semantics.
+- **Resolution:**
+  1. In `src/features/marketing/schema.ts`, `ageGroup` is now optional and conditionally validated via Zod `.superRefine`:
+     - When `marketType === "b2c"`, `ageGroup` is strictly required.
+     - When `marketType === "b2b"` or `"both"`, `ageGroup` is not required.
+  2. In `step-audience.tsx`, when `marketType` is B2B or Both, Q7 is disabled and replaced with an informative callout: *"Age targeting not required for B2B or mixed B2B/B2C assessment."*
+  3. Stale age values are automatically cleared upon switching to B2B or Both.
+- **Verification:** Verified via `tests/marketing/conditional-age.test.ts` across `b2c -> b2b -> both -> b2c` state transitions.
+
+### 8.3 Correction 3: Technical Literacy Presentation & Grounded Copy Alignment (Issue 3)
+- **Root Cause:** Softmax heuristic values were mislabeled as "Confidence Calibration / posterior probability", and recommended copy did not allow user override or strictly reflect declared product capabilities.
+- **Resolution:**
+  1. In `audience-card.tsx`, relabeled the heuristic metric to **"Heuristic Classification Signal (Uncalibrated)"** with an explanatory footnote clarifying that empirical confidence calibration (reliability curves, ECE) is pending independent labeled research datasets.
+  2. Added an optional explicit **Target Audience Literacy Override** in Section C (`step-literacy.tsx`).
+  3. Decomposed report into transparent metrics: `questionnaireBaselineTier`, `nlpSuggestedTier`, `effectiveMessageTier`, and `overriddenByUser`.
+  4. The primary recommended value proposition strictly reflects `effectiveMessageTier`.
+  5. In `translator.ts`, deterministic fallback copy is grounded strictly in declared features without inventing unmentioned tech or claiming "zero downtime".
+  6. Surfaced `generationSource` badge ("OpenAI" vs "Template Fallback").
+- **Verification:** Verified via `tests/marketing/literacy-override.test.ts`.
+
+### 8.4 Correction 4: Real Pinecone Marketing Vector Knowledge Base (Issue 4)
+- **Root Cause:** The marketing module had not populated its knowledge dataset into the vector database, relying on static citations.
+- **Resolution:**
+  1. Created dataset files: `dataset/marketing_knowledge.jsonl` (35 verified records), `dataset/verified_sri_lanka_market_metrics.csv`, `dataset/channel_capability_catalog.csv`, `dataset/dataset_manifest.json`, and `tests/synthetic_marketing_functional_cases.jsonl` (24 synthetic regression scenarios).
+  2. Prepared and executed `scripts/upload-marketing-knowledge.ts` to embed all 35 records (`MKT-LK-001` to `MKT-LK-035`) with OpenAI `text-embedding-3-large` (3072 dimensions) and upsert into Pinecone under the dedicated namespace **`marketing-kalana-v1`**.
+  3. Verified complete namespace isolation: the Product module namespace (`product`) was untouched.
+  4. Implemented server-only runtime retrieval service in `src/features/marketing/engine/retrieve-marketing-knowledge.ts` with local JSONL fallback.
+  5. Sample semantic query verified live against Pinecone, returning relevant records (e.g. `MKT-LK-002`, `MKT-LK-004`, `MKT-LK-003`, `MKT-LK-007`).
+  6. The report dashboard renders dynamic citation cards with clickable source URLs, publisher tags, observed periods, and official caveats.
+- **Verification:** Verified via live verification script and `tests/marketing/rag-retrieval.test.ts`.
+
+### 8.5 AHP Consistency Ratio & Budget Invariant Fixes
+- **AHP Dynamic Calculation:** Removed hardcoded `cr = 0.042`. Dynamic calculation uses `DEFAULT_CRITERIA_PAIRWISE_MATRIX` ($5 \times 5$), yielding $\lambda_{\max} \approx 5.08$, $CI \approx 0.02$, and $CR \approx 0.018 \le 0.10$. Explicitly labeled as assumed prior weights pending empirical expert panel consensus.
+- **Budget Explanation:** Added transparent calculation steps in `budget-card.tsx` displaying the exact arithmetic breakdown from input budget to reserve and largest-remainder integer distribution.
+- **Timeframe Bug Fix:** Fixed Phase 3 roadmap timeframe for 1-month campaigns ("Week 3–4", resolving the legacy "Month 2–1" bug).
+- **Verification:** Verified via `tests/marketing/budget.test.ts` across boundary budgets: 0, 1, 1,500, 20,000, 50,123, and 100,001 LKR.

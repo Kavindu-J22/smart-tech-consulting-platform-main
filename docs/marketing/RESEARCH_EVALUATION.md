@@ -125,3 +125,22 @@ To enable reproducible stress-testing of the AHP and Budget engines without fabr
 - **Volume:** 5,000 synthetic test cases spanning 10 industry verticals, 8 Sri Lankan channels, and budgets from 10,000 LKR to 5,000,000 LKR.
 - **Provenance Statement:** All synthetic data files generated for load and consistency testing are marked with `provenance: "synthetic_stress_test"` to prevent conflation with empirical human research findings.
 
+
+
+---
+
+## 7. Data Provenance & Research Non-Fabrication Protocol (November 2026)
+
+In strict adherence to academic ethics, the module establishes clear boundaries across five tiers of data:
+
+| Data Tier | Scope & Source | Storage Location | Academic Status |
+| :--- | :--- | :--- | :--- |
+| **1. Verified Public Facts** | Published platform metrics from DataReportal Digital 2026, ICTA Sri Lanka, EDB, DPA | `dataset/marketing_knowledge.jsonl`<br>`Pinecone (marketing-kalana-v1)` | Verified secondary literature data |
+| **2. Research Assumptions** | Prior AHP criteria comparison matrix ($5 \times 5$), channel reach indices | `src/features/marketing/engine/ahp.ts`<br>`dataset/channel_capability_catalog.csv` | Assumed prior model pending expert panel validation |
+| **3. Synthetic Test Fixtures** | 24 multi-variant edge test scenarios for automated functional testing | `tests/synthetic_marketing_functional_cases.jsonl` | Synthetic test inputs (NOT training data or empirical results) |
+| **4. Empirical Usability Responses** | Real participant survey data (SUS 10 items) | `research_templates/SUS_EVALUATION_TEMPLATE.csv` | **Pending Ethical Field Study** (template intentionally empty) |
+| **5. Expert AHP & Cost Validation** | Real expert pairwise comparisons and observed commercial CPC/CPM | `research_templates/EXPERT_AHP_JUDGMENTS_TEMPLATE.csv`<br>`research_templates/CHANNEL_METRICS_OBSERVATIONS_TEMPLATE.csv` | **Pending Empirical Field Study** (templates intentionally empty) |
+
+### 7.1 Non-Fabrication Guarantee
+- No empirical survey results, participant completion times, conversion rates, or expert agreement statistics have been fabricated or hardcoded.
+- Softmax output from the keyword/role heuristic classifier is labeled as **"Heuristic Classification Signal (Uncalibrated)"**. Empirical confidence calibration (reliability diagrams, Expected Calibration Error) will be executed when independently labeled ground-truth data are collected.

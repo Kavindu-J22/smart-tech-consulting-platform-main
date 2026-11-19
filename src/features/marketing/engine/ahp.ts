@@ -1,6 +1,5 @@
 import {
   AHP_CRITERIA,
-  DEFAULT_AHP_WEIGHTS,
   MARKETING_CHANNEL_LABELS,
   SAATY_RANDOM_INDEX,
 } from "@/features/marketing/options";
@@ -83,31 +82,36 @@ export interface AHPEvaluationInput {
   customPairwiseMatrix?: number[][];
 }
 
+export const DEFAULT_CRITERIA_PAIRWISE_MATRIX: number[][] = [
+  [1.0, 1.5, 2.0, 2.5, 3.5],
+  [1 / 1.5, 1.0, 1.4, 2.0, 2.5],
+  [1 / 2.0, 1 / 1.4, 1.0, 1.4, 1.8],
+  [1 / 2.5, 1 / 2.0, 1 / 1.4, 1.0, 1.3],
+  [1 / 3.5, 1 / 2.5, 1 / 1.8, 1 / 1.3, 1.0],
+];
+
 /**
  * Runs multi-criteria AHP channel evaluation across the 8 candidate marketing channels.
+ * Dynamically computes consistency ratio (CR) and priority weights from the pairwise comparison matrix.
  */
 export function evaluateAHPChannels(input: AHPEvaluationInput): AHPReport {
-  let criteriaWeights = DEFAULT_AHP_WEIGHTS;
-  let cr = 0.042;
-  let isConsistent = true;
-  let isAssumed = true;
-  let weightVersion = "v1-synthetic-assumed";
+  const isCustom = Boolean(
+    input.customPairwiseMatrix && input.customPairwiseMatrix.length === 5,
+  );
+  const matrix = isCustom ? input.customPairwiseMatrix! : DEFAULT_CRITERIA_PAIRWISE_MATRIX;
 
-  // If user or expert provides a custom 5x5 pairwise comparison matrix
-  if (input.customPairwiseMatrix && input.customPairwiseMatrix.length === 5) {
-    const ahpRes = calculateAHPWeights(input.customPairwiseMatrix);
-    criteriaWeights = {
-      audience_fit: ahpRes.weights[0],
-      objective_fit: ahpRes.weights[1],
-      cost_suitability: ahpRes.weights[2],
-      reach_fit: ahpRes.weights[3],
-      content_fit: ahpRes.weights[4],
-    };
-    cr = ahpRes.cr;
-    isConsistent = ahpRes.isConsistent;
-    isAssumed = false;
-    weightVersion = "custom-expert-matrix";
-  }
+  const ahpRes = calculateAHPWeights(matrix);
+  const criteriaWeights = {
+    audience_fit: ahpRes.weights[0],
+    objective_fit: ahpRes.weights[1],
+    cost_suitability: ahpRes.weights[2],
+    reach_fit: ahpRes.weights[3],
+    content_fit: ahpRes.weights[4],
+  };
+  const cr = ahpRes.cr;
+  const isConsistent = ahpRes.isConsistent;
+  const isAssumed = !isCustom;
+  const weightVersion = isCustom ? "custom-expert-matrix" : "assumed-prior-baseline";
 
   const scoredChannels: RankedChannelItem[] = [];
 

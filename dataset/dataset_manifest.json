@@ -1,0 +1,53 @@
+{
+  "manifestVersion": "1.0.0",
+  "module": "marketing-strategy-assessment",
+  "candidate": "Kalana (IT23221796)",
+  "researchProject": "J26-ISE-313 Smart Tech Consulting Platform",
+  "lastUpdated": "2026-11-19",
+  "pinecone": {
+    "namespace": "marketing-kalana-v1",
+    "embeddingModel": "text-embedding-3-large",
+    "dimensions": 3072,
+    "similarityMetric": "cosine",
+    "recordCount": 35,
+    "idFormat": "MKT-LK-###",
+    "provenance": "public_source_paraphrase"
+  },
+  "datasets": [
+    {
+      "file": "dataset/marketing_knowledge.jsonl",
+      "format": "jsonl",
+      "records": 35,
+      "description": "35 verified public-source Sri Lankan marketing and platform-evidence records formatted for Pinecone upsert and semantic retrieval.",
+      "provenance": "public_source_paraphrase",
+      "sources": ["DataReportal Digital 2026", "ICTA Sri Lanka", "Sri Lanka EDB", "Data Protection Authority", "Google Ads Help", "LinkedIn Marketing Solutions", "TikTok Ads Manager", "Meta Business Help"]
+    },
+    {
+      "file": "dataset/verified_sri_lanka_market_metrics.csv",
+      "format": "csv",
+      "records": 35,
+      "description": "Tabular export of verified Sri Lankan market metrics and digital channel guidance for research documentation and audit.",
+      "provenance": "public_source_paraphrase"
+    },
+    {
+      "file": "dataset/channel_capability_catalog.csv",
+      "format": "csv",
+      "records": 8,
+      "description": "Channel profile catalog with rule-based reach and cost assumptions, with empirical CPC/CPM/conversion rate columns intentionally blank pending empirical field testing.",
+      "provenance": "rule_based_assumption_catalog"
+    },
+    {
+      "file": "tests/synthetic_marketing_functional_cases.jsonl",
+      "format": "jsonl",
+      "records": 24,
+      "description": "24 diverse synthetic functional regression cases covering B2B, B2C, Both, differing literacy tiers, diverse budgets, and channel configurations.",
+      "provenance": "synthetic_functional_fixtures"
+    }
+  ],
+  "templates": [
+    "research_templates/SUS_EVALUATION_TEMPLATE.csv",
+    "research_templates/EXPERT_AHP_JUDGMENTS_TEMPLATE.csv",
+    "research_templates/LITERACY_GROUND_TRUTH_TEMPLATE.csv",
+    "research_templates/CHANNEL_METRICS_OBSERVATIONS_TEMPLATE.csv"
+  ]
+}

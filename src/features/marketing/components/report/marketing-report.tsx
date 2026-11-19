@@ -98,7 +98,12 @@ export function MarketingReport({ companyId, assessmentId, report, answers }: Pr
       <AHPCard data={report.channelStrategy} />
       <BudgetCard data={report.budgetPlan} />
       <ActionsCard actions={report.actionPlan} />
-      <CitationsCard citations={report.citations} />
+      <CitationsCard
+        citations={report.citations}
+        retrievedEvidence={report.retrievedEvidence}
+        evidenceSource={report.evidenceSource}
+        evidenceNamespace={report.evidenceNamespace}
+      />
       <ResearchEvalCard />
     </div>
   );

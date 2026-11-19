@@ -1,0 +1,2 @@
+campaign_id,company_id,channel_id,observed_period,actual_spend_lkr,actual_impressions,actual_clicks,actual_conversions,empirical_cpc_lkr,empirical_cpm_lkr,empirical_cvr,data_source
+# EMPTY TEMPLATE: Populate with real verified ad spend/conversion data to replace rule-based cost indices with empirical metrics.

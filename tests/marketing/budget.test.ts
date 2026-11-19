@@ -91,3 +91,31 @@ test("optimizeMarketingBudget - equal split baseline benchmark computed accurate
     "Higher AHP score channel must receive higher or equal budget than lower scoring channel",
   );
 });
+
+test("optimizeMarketingBudget - supervisor boundary budgets [0, 1, 1500, 20000, 50123, 100001] LKR exact-sum test", () => {
+  const testBudgets = [0, 1, 1500, 20000, 50123, 100001];
+
+  for (const budget of testBudgets) {
+    const result = optimizeMarketingBudget({
+      monthlyBudgetLkr: budget,
+      campaignMonths: 1, // 1 month duration
+      budgetFlexibility: "moderately_flexible",
+      reservePercentage: 10,
+      channels: sampleChannels,
+    });
+
+    assert.strictEqual(
+      result.exactSumVerified,
+      true,
+      `Budget ${budget} LKR must satisfy exact-sum invariant`,
+    );
+
+    const channelSum = result.channelAllocations.reduce((acc, c) => acc + c.monthlyLkr, 0);
+    assert.strictEqual(
+      channelSum + result.reserveMonthlyLkr,
+      budget,
+      `Allocations (${channelSum}) + Reserve (${result.reserveMonthlyLkr}) must equal exact budget (${budget})`,
+    );
+  }
+});
+

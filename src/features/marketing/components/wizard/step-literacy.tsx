@@ -4,6 +4,8 @@ import { Controller, type Control, type FieldErrors } from "react-hook-form";
 import { FieldGroup } from "@/components/ui/field";
 import { ChoiceField } from "@/components/shared/choice-field";
 import {
+  LITERACY_TIERS,
+  LITERACY_TIER_LABELS,
   MESSAGE_DETAIL_LABELS,
   MESSAGE_DETAIL_PREFERENCES,
   TECH_COMFORT_LABELS,
@@ -23,11 +25,11 @@ export function StepLiteracy({ control, errors }: Props) {
     <FieldGroup>
       <div className="border-neutral-150 mb-2 rounded-lg border bg-neutral-50/50 p-4">
         <h3 className="text-sm font-semibold text-neutral-900">
-          Section C: Audience Technical Literacy & Detail (Q10–Q12)
+          Section C: Audience Technical Literacy & Communication (Q10–Q12)
         </h3>
         <p className="mt-0.5 text-xs text-neutral-500">
-          Evaluate customer comfort with technical concepts. Q10 and Q11 drive the rule baseline and
-          classifier; Q12 governs preferred marketing tone.
+          Evaluate customer comfort with technical concepts. Q10 and Q11 drive the algorithmic
+          heuristic signal; Q12 governs preferred communication detail.
         </p>
       </div>
 
@@ -78,6 +80,36 @@ export function StepLiteracy({ control, errors }: Props) {
           />
         )}
       />
+
+      {/* Target Audience Literacy Override (Optional) */}
+      <div className="mt-2 rounded-lg border border-neutral-200 bg-neutral-50/40 p-4">
+        <div className="mb-3">
+          <p className="text-sm font-semibold text-neutral-900">
+            Target Audience Literacy for Recommended Message (Optional Override)
+          </p>
+          <p className="mt-0.5 text-xs text-neutral-500">
+            By default, the AI classifier automatically selects the best matching message tier based
+            on your Q10+Q11 answers and persona description. You can optionally force the recommended
+            copy to match an explicit tier below.
+          </p>
+        </div>
+
+        <Controller
+          name="targetAudienceLiteracyOverride"
+          control={control}
+          render={({ field }) => (
+            <ChoiceField
+              name="targetAudienceLiteracyOverride"
+              label="Select preferred messaging tier (or leave default for automatic heuristic selection):"
+              ids={LITERACY_TIERS}
+              labels={LITERACY_TIER_LABELS}
+              value={field.value ?? ""}
+              onChange={field.onChange}
+              error={errors.targetAudienceLiteracyOverride}
+            />
+          )}
+        />
+      </div>
     </FieldGroup>
   );
 }

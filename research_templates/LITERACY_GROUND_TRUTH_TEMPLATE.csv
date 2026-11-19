@@ -1,0 +1,2 @@
+sample_id,industry,target_job_role,freeform_audience_persona,declared_comfort_1to5,declared_terms_1to5,human_expert_label,model_predicted_label,override_applied,notes
+# EMPTY TEMPLATE: Populate with independently labeled human evaluations to calculate empirical Precision, Recall, and F1.

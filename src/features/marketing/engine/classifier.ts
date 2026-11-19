@@ -7,6 +7,7 @@ export interface ClassifierInput {
   customerRole: string;
   industry: string;
   marketType: string;
+  targetAudienceLiteracyOverride?: "low" | "medium" | "high" | null;
 }
 
 /**
@@ -75,6 +76,7 @@ const LOW_TECH_KEYWORDS = [
 /**
  * NLP-assisted target audience technical literacy classification (FR3).
  * Fuses structured questionnaire signals with open-ended audience text description.
+ * Respects explicit user overrides while recording the independent algorithmic estimate.
  */
 export function classifyAudienceTechnicalLiteracy(
   input: ClassifierInput,
@@ -137,7 +139,7 @@ export function classifyAudienceTechnicalLiteracy(
   logitHigh += Math.min(2.0, highKeywordHits * 0.6);
   logitLow += Math.min(2.0, lowKeywordHits * 0.6);
 
-  // Softmax normalization to obtain probabilities
+  // Softmax normalization to obtain heuristic signal proportions
   const maxLogit = Math.max(logitLow, logitMed, logitHigh);
   const expLow = Math.exp(logitLow - maxLogit);
   const expMed = Math.exp(logitMed - maxLogit);
@@ -148,23 +150,28 @@ export function classifyAudienceTechnicalLiteracy(
   const probMed = Number((expMed / sumExp).toFixed(4));
   const probHigh = Number((expHigh / sumExp).toFixed(4));
 
-  // Determine winning class
-  let winningTier: "low" | "medium" | "high" = "medium";
+  // Determine algorithmic winning class (NLP-suggested tier)
+  let nlpSuggestedTier: "low" | "medium" | "high" = "medium";
   let maxProb = probMed;
 
   if (probLow > maxProb) {
-    winningTier = "low";
+    nlpSuggestedTier = "low";
     maxProb = probLow;
   }
   if (probHigh > maxProb) {
-    winningTier = "high";
+    nlpSuggestedTier = "high";
     maxProb = probHigh;
   }
+
+  // Handle explicit user override
+  const override = input.targetAudienceLiteracyOverride;
+  const overriddenByUser = Boolean(override && (override === "low" || override === "medium" || override === "high"));
+  const effectiveMessageTier: "low" | "medium" | "high" = overriddenByUser && override ? override : nlpSuggestedTier;
 
   // Explanatory reason codes
   const reasonCodes: string[] = [];
   reasonCodes.push(
-    `Structured indicator: Technology comfort score of ${comfortScore}/5 and terminology familiarity of ${termsScore}/5.`,
+    `Structured indicator: Technology comfort score of ${comfortScore}/5 and terminology familiarity of ${termsScore}/5 (baseline: ${ruleBaseline}).`,
   );
   if (highKeywordHits > 0) {
     reasonCodes.push(
@@ -179,12 +186,22 @@ export function classifyAudienceTechnicalLiteracy(
   reasonCodes.push(
     `Role alignment: Target customer role '${input.customerRole.replace(/_/g, " ")}' informs digital workflow proficiency.`,
   );
+  if (overriddenByUser && override) {
+    reasonCodes.push(
+      `User override: Target messaging tier explicitly set to '${override}' by founder (algorithmic estimate was '${nlpSuggestedTier}').`,
+    );
+  }
 
   const uncertaintyCaveat =
-    "Classification combines structured self-reported signals and vocabulary extraction. Empirical field validation with real customer cohorts is pending.";
+    "Classification signal is a relative heuristic indicator derived from self-reported Likert scores and vocabulary keyword matching, not an empirical posterior probability or calibrated accuracy.";
 
   return {
-    literacyTier: winningTier,
+    literacyTier: effectiveMessageTier, // effective tier for copy and strategy
+    questionnaireBaselineTier: ruleBaseline,
+    nlpSuggestedTier,
+    effectiveMessageTier,
+    overriddenByUser,
+    heuristicSignalLabel: "Heuristic Classification Signal (Uncalibrated)",
     probabilities: {
       low: probLow,
       medium: probMed,

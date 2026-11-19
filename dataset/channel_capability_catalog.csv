@@ -1,0 +1,9 @@
+channel_id,channel_name,primary_market_fit,supported_content_types,rule_based_reach_assumption,rule_based_cost_index_assumption,min_viable_monthly_budget_lkr,empirical_cpc_lkr,empirical_cpm_lkr,empirical_conversion_rate,notes
+facebook,Facebook,"b2c, b2b","short_videos, images_graphics, customer_testimonials",0.87,0.75,5000,,,,Broadest domestic social reach; assumptions based on Meta reported reach in DataReportal 2026.
+instagram,Instagram,"b2c, b2b","short_videos, images_graphics, product_demos",0.62,0.72,5000,,,,Visual engagement for urban demographics 18-34; assumptions based on Meta ad reach.
+linkedin,LinkedIn,"b2b, both","articles_blogs, case_studies, educational_videos",0.35,0.40,15000,,,,Professional decision-maker targeting; registered member reach from DataReportal 2026.
+tiktok,TikTok,"b2c, both",short_videos,0.48,0.85,5000,,,,Youth short-video reach for adult audiences 18+; based on ByteDance ad reach.
+youtube,YouTube,"both, b2c, b2b","educational_videos, product_demos, case_studies",0.78,0.65,10000,,,,Second highest search engine locally; long-form tutorial and demo engagement.
+google_ads,Google Ads (Search),"both, b2b, b2c","articles_blogs, product_demos",0.85,0.45,15000,,,,High-intent search traffic; costs vary by keyword competitiveness.
+email_marketing,Email Marketing,"b2b, both","articles_blogs, case_studies, product_demos",0.50,0.95,0,,,,Direct lifecycle nurture; zero marginal ad spend beyond software platform.
+website_seo,Website & SEO,"both, b2b, b2c","articles_blogs, case_studies, product_demos",0.80,0.90,0,,,,Organic discovery foundation; long-term compounding digital asset.

@@ -34,52 +34,38 @@ export function MarketingWizard({ companyId, assessmentId, initialAnswers }: Pro
       productName: (initialAnswers?.productName as string) ?? "",
       productDescription: (initialAnswers?.productDescription as string) ?? "",
       mainFeatures: (initialAnswers?.mainFeatures as string) ?? "",
-      industry: (initialAnswers?.industry as MarketingAnswers["industry"]) ?? "saas",
+      industry: (initialAnswers?.industry as MarketingAnswers["industry"]) ?? undefined,
       primaryTargetCustomer: (initialAnswers?.primaryTargetCustomer as string) ?? "",
-      marketType: (initialAnswers?.marketType as MarketingAnswers["marketType"]) ?? "b2b",
-      ageGroup: (initialAnswers?.ageGroup as MarketingAnswers["ageGroup"]) ?? "age_25_34",
-      customerRole:
-        (initialAnswers?.customerRole as MarketingAnswers["customerRole"]) ?? "business_owner",
+      marketType: (initialAnswers?.marketType as MarketingAnswers["marketType"]) ?? undefined,
+      ageGroup: (initialAnswers?.ageGroup as MarketingAnswers["ageGroup"]) ?? undefined,
+      customerRole: (initialAnswers?.customerRole as MarketingAnswers["customerRole"]) ?? undefined,
       audienceLocation:
-        (initialAnswers?.audienceLocation as MarketingAnswers["audienceLocation"]) ??
-        "western_province",
-      techComfort: (initialAnswers?.techComfort as MarketingAnswers["techComfort"]) ?? "comfort_3",
+        (initialAnswers?.audienceLocation as MarketingAnswers["audienceLocation"]) ?? undefined,
+      techComfort: (initialAnswers?.techComfort as MarketingAnswers["techComfort"]) ?? undefined,
       techTermsFamiliarity:
         (initialAnswers?.techTermsFamiliarity as MarketingAnswers["techTermsFamiliarity"]) ??
-        "terms_3",
+        undefined,
       messageDetailPreference:
         (initialAnswers?.messageDetailPreference as MarketingAnswers["messageDetailPreference"]) ??
-        "detail_3",
+        undefined,
+      targetAudienceLiteracyOverride:
+        (initialAnswers?.targetAudienceLiteracyOverride as MarketingAnswers["targetAudienceLiteracyOverride"]) ??
+        undefined,
       keyCustomerBenefit: (initialAnswers?.keyCustomerBenefit as string) ?? "",
       customerPainPoints:
-        (initialAnswers?.customerPainPoints as MarketingAnswers["customerPainPoints"]) ?? [
-          "saves_time",
-          "reduces_costs",
-        ],
+        (initialAnswers?.customerPainPoints as MarketingAnswers["customerPainPoints"]) ?? [],
       channelsCurrentlyUsed:
-        (initialAnswers?.channelsCurrentlyUsed as MarketingAnswers["channelsCurrentlyUsed"]) ?? [
-          "facebook",
-          "website_seo",
-        ],
+        (initialAnswers?.channelsCurrentlyUsed as MarketingAnswers["channelsCurrentlyUsed"]) ?? [],
       channelsWorkingBest:
-        (initialAnswers?.channelsWorkingBest as MarketingAnswers["channelsWorkingBest"]) ?? [
-          "facebook",
-        ],
+        (initialAnswers?.channelsWorkingBest as MarketingAnswers["channelsWorkingBest"]) ?? [],
       preferredContent:
-        (initialAnswers?.preferredContent as MarketingAnswers["preferredContent"]) ?? [
-          "short_videos",
-          "images_graphics",
-        ],
-      monthlyBudgetLkr: (initialAnswers?.monthlyBudgetLkr as number) ?? 50000,
+        (initialAnswers?.preferredContent as MarketingAnswers["preferredContent"]) ?? [],
+      monthlyBudgetLkr: (initialAnswers?.monthlyBudgetLkr as number) ?? (undefined as unknown as number),
       budgetFlexibility:
-        (initialAnswers?.budgetFlexibility as MarketingAnswers["budgetFlexibility"]) ??
-        "moderately_flexible",
+        (initialAnswers?.budgetFlexibility as MarketingAnswers["budgetFlexibility"]) ?? undefined,
       campaignDuration:
-        (initialAnswers?.campaignDuration as MarketingAnswers["campaignDuration"]) ?? "duration_3m",
-      campaignGoals: (initialAnswers?.campaignGoals as MarketingAnswers["campaignGoals"]) ?? [
-        "leads",
-        "brand_awareness",
-      ],
+        (initialAnswers?.campaignDuration as MarketingAnswers["campaignDuration"]) ?? undefined,
+      campaignGoals: (initialAnswers?.campaignGoals as MarketingAnswers["campaignGoals"]) ?? [],
       reservePercentage: (initialAnswers?.reservePercentage as number) ?? 0,
       customAudienceNotes: (initialAnswers?.customAudienceNotes as string) ?? "",
     },
@@ -92,6 +78,7 @@ export function MarketingWizard({ companyId, assessmentId, initialAnswers }: Pro
     handleSubmit,
     trigger,
     getValues,
+    setValue,
     formState: { errors },
   } = form;
 
@@ -136,14 +123,29 @@ export function MarketingWizard({ companyId, assessmentId, initialAnswers }: Pro
     }
   };
 
-  const onSubmit = handleSubmit((values) => {
-    startTransition(async () => {
-      const res = await runMarketingAnalysisAction(companyId, assessmentId, values);
-      if (res && !res.success) {
-        toast.error(res.error || "Analysis failed. Please check inputs.");
-      }
-    });
-  });
+  // Explicit user-intent submission gate: only triggered by user explicitly clicking the Run button on Step 5
+  const handleExplicitRun = async () => {
+    if (isAnalyzing) return;
+    if (currentStep !== 5) {
+      toast.error("Please complete and navigate to the final step before running analysis.");
+      return;
+    }
+
+    const isValid = await trigger();
+    if (!isValid) {
+      toast.error("Please complete all required questions across all sections before running analysis.");
+      return;
+    }
+
+    handleSubmit((values) => {
+      startTransition(async () => {
+        const res = await runMarketingAnalysisAction(companyId, assessmentId, values);
+        if (res && !res.success) {
+          toast.error(res.error || "Analysis failed. Please check inputs.");
+        }
+      });
+    })();
+  };
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-6">
@@ -196,12 +198,27 @@ export function MarketingWizard({ companyId, assessmentId, initialAnswers }: Pro
       </nav>
 
       <FormPanel title={currentStepConfig.title} description={currentStepConfig.description}>
-        <form onSubmit={onSubmit} noValidate className="flex flex-col gap-6">
+        {/* Form intercepts implicit submit and Enter key on inputs to prevent premature submission */}
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && (e.target as HTMLElement)?.tagName === "INPUT") {
+              e.preventDefault();
+            }
+          }}
+          noValidate
+          className="flex flex-col gap-6"
+        >
           {currentStep === 1 && (
             <StepProduct register={register} control={control} errors={errors} />
           )}
           {currentStep === 2 && (
-            <StepAudience register={register} control={control} errors={errors} />
+            <StepAudience
+              register={register}
+              control={control}
+              setValue={setValue}
+              errors={errors}
+            />
           )}
           {currentStep === 3 && <StepLiteracy control={control} errors={errors} />}
           {currentStep === 4 && (
@@ -253,7 +270,8 @@ export function MarketingWizard({ companyId, assessmentId, initialAnswers }: Pro
                 </AppButton>
               ) : (
                 <AppButton
-                  type="submit"
+                  type="button"
+                  onClick={handleExplicitRun}
                   disabled={isAnalyzing}
                   className="w-full gap-2 bg-emerald-600 text-white hover:bg-emerald-700 sm:w-auto"
                 >
